@@ -1,27 +1,39 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var _ = require('lodash');
-
-//var AptList = require('./AptList');
-//var AddAppointment = require('./AddAppointment');
-// var SearchAppointments = require('./SearchAppointments');
 
 var MainInterface = React.createClass({
-   render: function () {
-     return (
-       <div clasName="interface">
-       <h1>Pet Appointments</h1>
-       <li>Buffy 3:30 PM</li>
+    getInitialState: function() {
+        return {
+            title: 'Appointments',
+            show: true
+        } //return
+    }, //getInitialState
 
-      </div>
-     )
-   }
+    render: function() {
+        var showTitle;
+        if (this.state.show) {
+            showTitle = 'New';
+        }
 
-});
+        var displayList = {
+            display: this.state.show ? 'block':'none',
+            color: 'red'
+        }
 
-//Render this component
+        return (
+            <div className="interface">
+                <h1>{ showTitle } {this.state.title}</h1>
+                <ul style={displayList}>
+                    <li>Buffy 3:30 PM</li>
+                    <li>Spot 8:30 PM</li>
+                    <li>Goldie 3:50 PM</li>
+                </ul>
+            </div>
+        )
+    } //render
+}); //MainInterface
+
 ReactDOM.render(
-
-  <MainInterface/>,
-  document.getElementById('petAppointments')
-);
+    <MainInterface />,
+    document.getElementById('petAppointments')
+); //render
